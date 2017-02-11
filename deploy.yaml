@@ -9,11 +9,11 @@
      image_name: ami-70edb016
      security_group: microservice-group
   
-  tasks:
+  tasks:  
     - name: Setup variables needed later
       set_fact: 
          region: "{{ region }}"
-         
+
     - name: Setup security group - port 22 can be removed in future
       ec2_group:
         name: "{{ security_group }}"
@@ -46,6 +46,7 @@
         exact_count: 1 
         count_tag:
           Deploy: Blue
+          Name: Position_Tracker
         instance_tags:
           Name: Position_Tracker
           Deploy: Blue
@@ -94,7 +95,7 @@
             state: link
     become: true
 
-  - name: Install Config Server as a startup service
+  - name: Install as a startup service
     service:
             name: microservice
             state: started
@@ -114,6 +115,7 @@
     ec2_remote_facts:
        filters:
           "tag:Deploy": Blue
+          "tag:Name": Position_Tracker
           instance-state-name: running
        region: "{{ region }}"
     register: new_server
@@ -122,6 +124,7 @@
     ec2_remote_facts:
        filters:
           "tag:Deploy": Green
+          "tag:Name": Position_Tracker
           instance-state-name: running
        region: "{{ region }}"
     register: old_green
@@ -130,6 +133,7 @@
     ec2:
       exact_count: 0
       count_tag:
+        Name: Position_Tracker
         Deploy: Green
       region: "{{ region }}"
       image: notneeded
