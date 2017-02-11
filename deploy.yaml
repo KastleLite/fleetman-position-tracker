@@ -10,6 +10,10 @@
      security_group: microservice-group
   
   tasks:
+    - name: Setup variables needed later
+      set_fact: 
+         region: "{{ region }}"
+         
     - name: Setup security group - port 22 can be removed in future
       ec2_group:
         name: "{{ security_group }}"
