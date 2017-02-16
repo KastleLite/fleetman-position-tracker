@@ -54,13 +54,13 @@
       register: ec2
 
     - name: Add all instance public IPs to host group
-      add_host: hostname={{ item.public_ip }} groups=ec2hosts
+      add_host: hostname={{ item.private_ip_address }} groups=ec2hosts
       with_items: "{{ec2.instances}}"
 
     - name: Wait for SSH Server to start responding
       wait_for:
               port: 22
-              host: "{{item.public_ip}}"
+              host: "{{item.private_ip_address}}"
               state: started
       with_items: "{{ec2.instances}}"
 
