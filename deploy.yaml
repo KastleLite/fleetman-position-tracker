@@ -38,6 +38,7 @@
     - name: Provision an instance
       ec2:
         assign_public_ip: no
+        vpc_subnet_id: subnet-48769101
         key_name: "{{ keypair_name }}"
         group: "{{ security_group }}"
         instance_type: "{{ instance_type }}"
