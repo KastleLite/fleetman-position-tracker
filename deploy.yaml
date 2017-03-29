@@ -37,6 +37,7 @@
 
     - name: Provision an instance
       ec2:
+        assign_public_ip: no
         key_name: "{{ keypair_name }}"
         group: "{{ security_group }}"
         instance_type: "{{ instance_type }}"
