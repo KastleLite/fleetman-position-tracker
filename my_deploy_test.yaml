@@ -12,7 +12,7 @@
   tasks:
 
     - name: Make sure boto is installed
-      pip3: 
+      pip: 
         name: 
           - boto3
           - botocore
