@@ -52,7 +52,7 @@
         image_id: "{{ base_image_name }}"
         wait: yes
         region: "{{ region }}"
-        count: "{{ number_of_instances_to_create }}"
+        exact_count: "{{ number_of_instances_to_create }}"
       register: ec2
 
     - name: Gather the new ip addresses
@@ -91,4 +91,4 @@
         image_id: notneeded
         wait: yes
         region: "{{ region }}"
-        count: 0
+        exact_count: 0
