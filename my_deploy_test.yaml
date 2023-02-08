@@ -66,7 +66,7 @@
     - name: Wait for SSH to come up
       local_action:
         module: wait_for
-        host: "{{ item.public_ip_address }}"
+        host: "{{ item.public_ip }}"
         port: 22
         delay: 10
         timeout: 120
