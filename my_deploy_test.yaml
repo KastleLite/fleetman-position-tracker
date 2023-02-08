@@ -7,6 +7,7 @@
      instance_type: t4g.nano
      base_image_name: ami-0aa7d40eeae50c9a9
      number_of_instances_to_create: 1
+     ansible_python_interpreter: /usr/bin/python3
 
   tasks:
 
@@ -41,7 +42,7 @@
         key_name: microservice-course-keypair
         group: jenkins_server_security_group
         instance_type: "{{ instance_type }}"
-        image: "{{ base_image_name }}"
+        image_id: "{{ base_image_name }}"
         wait: yes
         region: "{{ region }}"
         exact_count: "{{ number_of_instances_to_create }}"
@@ -80,7 +81,7 @@
         key_name: microservice-course-keypair
         group: jenkins_server_security_group
         instance_type: notneeded
-        image: notneeded
+        image_id: notneeded
         wait: yes
         region: "{{ region }}"
         exact_count: 0
