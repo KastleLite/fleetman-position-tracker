@@ -11,6 +11,13 @@
 
   tasks:
 
+    - name: Make sure boto is installed
+      pip3: 
+        name: 
+          - boto3
+          - botocore
+        state: present
+
     - name: Setup variables for later use
       set_fact:
          region: "{{ region }}"
