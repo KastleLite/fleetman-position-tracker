@@ -59,9 +59,15 @@
           Name: Dummy_Test
       register: ec2
 
-    - name: Gather the new ip addresses
-      add_host: groups=new_ec2_instances hostname="{{ item.public_ip }}"
-      with_items: "{{ ec2.instances }}"
+#    - name: Gather the new ip addresses
+#      add_host: groups=new_ec2_instances hostname="{{ item.public_ip }}"
+#      with_items: "{{ ec2.instances }}"
+
+    - name : Add instance to host group
+      add_host:
+          hostname: "{{ item.public_ip }}"
+          groupname: new_ec2_instances
+      loop: "{{ ec2.instances }}"
 
     - name: Wait for SSH to come up
       local_action:
@@ -72,7 +78,9 @@
         timeout: 120
       loop: "{{ ec2.instances }}"
 
-- hosts: new_ec2_instances, tag_Name_Dummy_Test
+- hosts: new_ec2_instances
+  gather_facts: false
+  become: true
 
   tasks:
 
