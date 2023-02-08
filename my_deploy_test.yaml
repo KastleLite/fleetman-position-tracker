@@ -44,7 +44,7 @@
               cidr_ip: 0.0.0.0/0
 
     - name: Start up an EC2 Temporary Instance
-      ec2_instance:
+      ec2:
         name: Dummy_Test
         key_name: microservice-course-keypair
         security_group: jenkins_server_security_group
@@ -83,7 +83,7 @@
   tasks:
 
     - name: All working so destroy the temporary instance
-      ec2_instance:
+      ec2:
         name: Dummy_Test
         key_name: microservice-course-keypair
         security_group: jenkins_server_security_group
